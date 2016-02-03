@@ -1,0 +1,34 @@
+
+<div class = "col-md-6 col-md-offset-3 text-center ">
+  <h1>An Error Occured</h1>
+</div>
+<div class = "row">
+<div class = "col-md-8 text-center white">
+  <h3 class = "title_with_seperator">Params</h3>
+  <table class="table">
+    <tr>
+      <th>Request Verb: </th>
+      <td><%= request.request_method %></td>
+    </tr>
+    <tr>
+      <th>Request Path: </th>
+      <td><%= request.path %></td>
+    </tr>
+    <tr>
+      <th colspan=2>Parameters</th>
+    </tr>
+    <% request.params.each do |key, value| %>
+      <tr>
+        <td><%= key %></td>
+        <td><%= value %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div class = "col-md-4">
+  <img src="https://robohash.org/uh%20oh%20this%20is%20broken" class="img-responsive" alt="Responsive image">
+</div>
+</div>
+<div class = "col-md-6 col-md-offset-3 text-right">
+<a href="/"><h3>Home</h3></a>
+</div>

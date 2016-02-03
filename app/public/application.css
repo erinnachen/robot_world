@@ -1,0 +1,10 @@
+.robot-back {
+  background-image: url("https://robohash.org/Little%20Robot%20World");
+  background-repeat: no-repeat;
+  background-position: right center;
+  height: 500px;
+
+}
+.top-filler{
+  height: 100px;
+}
