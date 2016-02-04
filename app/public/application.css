@@ -8,3 +8,14 @@
 .top-filler{
   height: 100px;
 }
+
+.bigger-robot-font {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 2em;
+}
+
+.robot-font {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 400;
+}
