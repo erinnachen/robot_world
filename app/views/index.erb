@@ -7,3 +7,26 @@
     </ul>
   </div>
 </nav>
+
+<% @robots.each do |robot| %>
+  <div class="col-md-6 well">
+    <div class = "row">
+      <div class = "col-md-6">
+        <img src="<%= robot.avatar %>" class="img-responsive">
+      </div>
+      <div class = "col-md-6">
+        <p class = "robot-font-med">
+          ID: <%= robot.id.to_s.rjust(6,'0') %><br>
+          Birthdate: <%= robot.birthdate.strftime("%b %d, %Y")%><br>
+          <%= robot.city %>, <%= robot.state %><br>
+          <br>
+          Department: <%= robot.department %><br>
+          Date Hired: <%= robot.date_hired.strftime("%b %d, %Y")%>
+        </p>
+      </div>
+    </div>
+    <div class = "col-md-6 text-center">
+      <h3 class = "robot-font-bold"><%= robot.name %> </h3>
+    </div>
+  </div>
+<% end %>

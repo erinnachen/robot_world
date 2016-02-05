@@ -1,5 +1,6 @@
 require 'models/robot_roster'
 require 'yaml/store'
+require 'models/robot'
 
 class RobotWorldApp < Sinatra::Base
   set :root, File.expand_path("..", __dir__)
@@ -9,7 +10,10 @@ class RobotWorldApp < Sinatra::Base
   end
 
   get '/robots' do
-    @robots = robot_roster.all
+    @robots = []
+    10.times do
+      @robots << Robot.new
+    end
     erb :index
   end
 
@@ -25,4 +29,5 @@ class RobotWorldApp < Sinatra::Base
     database = YAML::Store.new("db/robot_roster")
     RobotRoster.new(database)
   end
+
 end
