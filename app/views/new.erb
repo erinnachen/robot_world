@@ -10,11 +10,13 @@
 <div class = "col-md-6 col-md-offset-3 text-center ">
 <h2 class = "robot-font-bold divide-bottom">Build a better Robot-a</h2>
 <br>
+<div class = "row">
 <form action = "/robots" method = "post">
-  <div class="form-group">
+  <div class="form-group col-md-8 col-md-offset-2">
     <label for="robot_name" class = "robot-font-125">Name: </label>
     <input type="text" class="form-control text-center" id="robot_name" placeholder="Jane Robota" name='robot[name]'/>
   </div>
+</div>
   <br>
   <div class = "row">
   <div class="form-group col-md-8 col-md-offset-2">
@@ -34,6 +36,8 @@
   </div>
   </div>
   <br>
+  <div class = "row">
+  <div class = "col-md-8 col-md-offset-2">
   <label for="robot_dept" class = "robot-font-125">Department: </label>
   <select class="form-control" name='robot[department]'  id="robot_dept">
     <option >Recreation</option>
@@ -46,11 +50,17 @@
     <option>Education</option>
     <option>War</option>
   </select>
-  <br>
+</div>
+</div>
+<br>
+<div class ="row">
   <button type="submit" class="btn btn-primary">beep beep beep</button>
 </form>
+</div>
 <br>
+<div class ="row">
 <form action = "/robots/random" method = "post">
   <button type="submit" class="btn btn-info">build me a random robot</button>
 </form>
+</div>
 </div>
