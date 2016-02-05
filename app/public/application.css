@@ -30,3 +30,12 @@
   font-weight: 400;
   font-size: 1.5em;
 }
+.robot-font-125 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 400;
+  font-size: 1.25em;
+}
+
+.divide-bottom {
+  border-bottom: 2px solid #d5d5d5;
+}

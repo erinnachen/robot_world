@@ -1,0 +1,56 @@
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <a class="navbar-brand bigger-robot-font" href="/">(little) Robot World</a>
+    <ul class="nav navbar-nav navbar-right robot-font">
+      <li><a href="/robots">All the Robots</a></li>
+      <li><a href="/robots/new">New Robot(a)</a></li>
+    </ul>
+  </div>
+</nav>
+<div class = "col-md-6 col-md-offset-3 text-center ">
+<h2 class = "robot-font-bold divide-bottom">Build a better Robot-a</h2>
+<br>
+<form action = "/robots" method = "post">
+  <div class="form-group">
+    <label for="robot_name" class = "robot-font-125">Name: </label>
+    <input type="text" class="form-control text-center" id="robot_name" placeholder="Jane Robota" name='robot[name]'/>
+  </div>
+  <br>
+  <div class = "row">
+  <div class="form-group col-md-8 col-md-offset-2">
+    <label for="robot_bday" class = "robot-font-125">Birthdate: </label>
+    <input type="text" class="form-control text-center" id="robot_bday" placeholder="DD/MM/YYYY" name='robot[birthdate]'/>
+  </div>
+  </div>
+  <br>
+  <div class = "row">
+  <div class="form-group col-md-4 col-md-offset-2">
+    <label for="robot_city" class = "robot-font-125">City: </label>
+    <input type="text" class="form-control text-center" id="robot_city" placeholder="New York" name='robot[city]'/>
+  </div>
+  <div class="form-group col-md-4">
+    <label for="robot_state" class = "robot-font-125">State: </label>
+    <input type="text" class="form-control text-center" id="robot_state" placeholder="NY" name='robot[state]'/>
+  </div>
+  </div>
+  <br>
+  <label for="robot_dept" class = "robot-font-125">Department: </label>
+  <select class="form-control" name='robot[department]'  id="robot_dept">
+    <option >Recreation</option>
+    <option>Mining</option>
+    <option>Data Collection</option>
+    <option>Organization</option>
+    <option>Posse Cup</option>
+    <option>Administration</option>
+    <option>Maintenance</option>
+    <option>Education</option>
+    <option>War</option>
+  </select>
+  <br>
+  <button type="submit" class="btn btn-primary">beep beep beep</button>
+</form>
+<br>
+<form action = "/robots/random" method = "post">
+  <button type="submit" class="btn btn-info">build me a random robot</button>
+</form>
+</div>
