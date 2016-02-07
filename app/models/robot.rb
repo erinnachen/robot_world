@@ -1,5 +1,5 @@
 require 'digest'
-require 'pry'
+
 class Robot
   attr_accessor :name, :city, :state, :avatar,
                 :birthdate, :date_hired, :department, :id

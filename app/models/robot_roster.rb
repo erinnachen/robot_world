@@ -31,11 +31,15 @@ class RobotRoster
     database.transaction do
       target_robot = database["robots"].find { |robot| robot[:id] == id }
       target_robot[:name] = robot[:name] unless robot[:name].empty?
-      target_robot[:birthdate] = Time.parse(robot[:birthdate]) unless robot[:birthdate].empty?
+      unless robot[:birthdate].empty?
+        target_robot[:birthdate] = Time.parse(robot[:birthdate])
+        if Time.parse(robot[:birthdate]) > target_robot[:date_hired]
+          target_robot[:date_hired] = Faker::Time.between(Time.parse(robot[:birthdate]), Time.now)
+        end
+      end
       target_robot[:city] = robot[:city] unless robot[:city].empty?
       target_robot[:state] = robot[:state] unless robot[:state].empty?
       target_robot[:department] = robot[:department]
-      target_robot[:date_hired] = Faker::Time.between(Time.parse(robot[:birthdate]), Time.now) unless Time.parse(robot[:birthdate]) < target_robot[:date_hired]
     end
   end
 

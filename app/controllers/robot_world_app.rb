@@ -1,6 +1,4 @@
-require 'models/robot_roster'
 require 'yaml/store'
-require 'models/robot'
 
 class RobotWorldApp < Sinatra::Base
   set :root, File.expand_path("..", __dir__)
