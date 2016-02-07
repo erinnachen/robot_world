@@ -14,7 +14,12 @@ class Robot
   end
 
   def set_dates
+    begin
     self.birthdate = Time.parse(birthdate) if birthdate.class == String
+  rescue ArgumentError
+      self.birthdate = random_robot_props[:birthdate]
+    end
+    self.birthdate = random_robot_props[:birthdate] if birthdate > Time.now
     self.date_hired = Time.parse(birthdate) if birthdate.class == String
     self.date_hired = Faker::Time.between(birthdate, Time.now) if date_hired < birthdate
   end
