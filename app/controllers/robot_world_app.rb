@@ -34,6 +34,16 @@ class RobotWorldApp < Sinatra::Base
     erb :show
   end
 
+  get "/robots/:id/edit" do |id|
+    @robot = robot_roster.find(id.to_i)
+    erb :edit
+  end
+
+  put '/robots/:id' do |id|
+    robot_roster.update(params[:robot], id.to_i)
+    redirect "/robots/#{id}"
+  end
+
   delete '/robots/:id' do |id|
     robot_roster.delete(id.to_i)
     redirect '/robots'

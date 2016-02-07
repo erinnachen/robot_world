@@ -1,0 +1,62 @@
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <a class="navbar-brand bigger-robot-font" href="/">(little) Robot World</a>
+    <ul class="nav navbar-nav navbar-right robot-font">
+      <li><a href="/robots">All the Robots</a></li>
+      <li><a href="/robots/new">New Robot(a)</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class = "col-md-6 col-md-offset-3 text-center background-orange imageborder">
+  <br>
+  <br>
+  <div class = "col-md-12 text-center background-white imageborder">
+    <img src="<%= @robot.avatar %>">
+    <br>
+    <br>
+  </div>
+  <br>
+  <form action = "/robots/<%= @robot.id %>" method="post">
+  <input type="hidden" name="_method" value="put">
+  <div class="form-group col-md-8 col-md-offset-2">
+    <label for="robot_name" class = "robot-font-125">Name: </label>
+    <input type="text" class="form-control text-center" id="robot_name" placeholder="<%= @robot.name %>" name='robot[name]'/>
+  </div>
+  <br>
+  <div class = "row">
+  <div class="form-group col-md-8 col-md-offset-2">
+    <label for="robot_bday" class = "robot-font-125">Birthdate: </label>
+    <input type="text" class="form-control text-center" id="robot_bday" placeholder="<%= @robot.birthdate.strftime("%d/%m/%Y") %>" name='robot[birthdate]'/>
+  </div>
+  </div>
+  <br>
+  <div class = "row">
+  <div class="form-group col-md-4 col-md-offset-2">
+    <label for="robot_city" class = "robot-font-125">City: </label>
+    <input type="text" class="form-control text-center" id="robot_city" placeholder="<%= @robot.city %>" name='robot[city]'/>
+  </div>
+  <div class="form-group col-md-4">
+    <label for="robot_state" class = "robot-font-125">State: </label>
+    <input type="text" class="form-control text-center" id="robot_state" placeholder="<%= @robot.state %>" name='robot[state]'/>
+  </div>
+  </div>
+  <br>
+  <div class = "row">
+  <div class = "col-md-8 col-md-offset-2">
+  <label for="robot_dept" class = "robot-font-125">Department: </label>
+  <select class="form-control" name='robot[department]' id="robot_dept">
+    <% departments = ["Recreation", "Mining", "Data Collection", "Organization", "Posse Cup","Administration", "Maintenance", "Education", "War"] %>
+    <% departments.each do |department| %>
+      <option><%= department%></option>
+    <% end %>
+  </select>
+  </div>
+  </div>
+  <br>
+  <div class = "text-center">
+    <button type="submit" class="btn btn-default">Update me</button>
+  </div>
+  <br>
+  </form>
+</div>

@@ -26,7 +26,7 @@ class Robot
      city: Faker::Address.city,
      state: Faker::Address.state_abbr,
      birthdate: bd,
-     date_hired: Faker::Time.between(bd, Time.now-10),
+     date_hired: Faker::Time.between(bd, Time.now),
      department: departments[Random.rand(departments.length)]}
     props[:avatar] = Faker::Avatar.image(Digest::SHA1.hexdigest(props.to_s))
     props
