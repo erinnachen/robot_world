@@ -39,7 +39,7 @@
   <div class = "row">
   <div class = "col-md-8 col-md-offset-2">
   <label for="robot_dept" class = "robot-font-125">Department: </label>
-  <select class="form-control" name='robot[department]'  id="robot_dept">
+  <select class="form-control" name='robot[department]' id="robot_dept">
     <option >Recreation</option>
     <option>Mining</option>
     <option>Data Collection</option>
@@ -55,11 +55,13 @@
 <br>
 <div class ="row">
   <button type="submit" class="btn btn-primary">beep beep beep</button>
-</form>
 </div>
+</form>
+
 <br>
 <div class ="row">
 <form action = "/robots/random" method = "post">
+  <input type="hidden" name='random' value='true'>
   <button type="submit" class="btn btn-info">build me a random robot</button>
 </form>
 </div>

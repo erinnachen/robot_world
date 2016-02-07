@@ -10,15 +10,22 @@ class RobotWorldApp < Sinatra::Base
   end
 
   get '/robots' do
-    @robots = []
-    10.times do
-      @robots << Robot.new
-    end
+    @robots = robot_roster.all
     erb :index
   end
 
   get '/robots/new' do
     erb :new
+  end
+
+  post '/robots' do
+    robot_roster.create(params[:robot])
+    redirect '/robots'
+  end
+
+  post '/robots/random' do
+    robot_roster.create()
+    redirect '/robots'
   end
 
   not_found do
