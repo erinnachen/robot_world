@@ -1,0 +1,34 @@
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <a class="navbar-brand bigger-robot-font" href="/">(little) Robot World</a>
+    <ul class="nav navbar-nav navbar-right robot-font">
+      <li><a href="/robots">All the Robots</a></li>
+      <li><a href="/robots/new">New Robot(a)</a></li>
+      <li><a href="/stats">World statistics</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class = "col-md-12 background-stats">
+  <div class = "col-md-12">
+    <br>
+    <br>
+  </div>
+  <div class = "col-md-6"></div>
+  <div class = "col-md-6 background-white text-center imageborder">
+    <h1 class="robot-font divide-bottom ">Number of robots</h1>
+      <h3 class="robot-font"><%= @stats[:num] %></h3>
+    <h1 class="robot-font divide-bottom">Hires by year</h1>
+    <% @stats[:hires].each do |year, nhires| %>
+      <% str= "Robots"%>
+      <% str=str[0..-2] if nhires == 1%>
+      <h3 class="robot-font"><%= year%>: <%= nhires%> <%= str%></h3>
+    <% end %>
+    <h1 class="robot-font divide-bottom">Average robot age in seconds</h1>
+    <h3 class="robot-font"><%= @stats[:avg_age]%></h3>
+  </div>
+  <div class = "col-md-12">
+    <br>
+    <br>
+  </div>
+</div>

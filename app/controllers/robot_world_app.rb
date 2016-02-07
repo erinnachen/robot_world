@@ -10,6 +10,11 @@ class RobotWorldApp < Sinatra::Base
     erb :dashboard
   end
 
+  get '/stats' do
+    @stats = robot_roster.stats
+    erb :stats
+  end
+
   get '/robots' do
     @robots = robot_roster.all
     erb :index

@@ -49,4 +49,25 @@ class RobotRoster
     raw_robots.map {|data| Robot.new(data)}
   end
 
+  def stats
+    robots = all
+    {avg_age: average_robot_age(robots),
+     hires: calculate_hires_by_year(robots),
+     num: robots.length}
+  end
+
+  def calculate_hires_by_year(robots)
+    robot_years = robots.group_by { |robot| robot.date_hired.year }
+    num_hires = {}
+    robot_years.each do |year, robs|
+      num_hires[year] = robs.length
+    end
+    num_hires.sort_by {|year, hires| year }.reverse
+  end
+
+  def average_robot_age(robots, date = nil)
+    date ||= Time.now
+    age_in_secs = robots.map {|robot| date-robot.birthdate}
+    age_in_secs.reduce(0,:+)/robots.length
+  end
 end
