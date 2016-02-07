@@ -25,6 +25,14 @@
   font-weight: 700;
 }
 
+.background-orange {
+  background-color: #FFCC66;
+}
+
+.background-white {
+  background-color: white;
+}
+
 .robot-font-med {
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: 400;
@@ -36,6 +44,13 @@
   font-size: 1.25em;
 }
 
+.imageborder
+{
+  border: 2px solid black;
+}
 .divide-bottom {
   border-bottom: 2px solid #d5d5d5;
+}
+.divide-bottom-black {
+  border-bottom: 2px solid black;
 }

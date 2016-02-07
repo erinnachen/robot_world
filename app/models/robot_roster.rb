@@ -27,6 +27,12 @@ class RobotRoster
     Robot.new(props)
   end
 
+  def delete(id)
+    database.transaction do
+      database['robots'].delete_if { |robot| robot[:id] == id }
+    end
+  end
+
   def all
     raw_robots.map {|data| Robot.new(data)}
   end

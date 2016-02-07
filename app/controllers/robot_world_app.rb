@@ -34,7 +34,10 @@ class RobotWorldApp < Sinatra::Base
     erb :show
   end
 
-
+  delete '/robots/:id' do |id|
+    robot_roster.delete(id.to_i)
+    redirect '/robots'
+  end
 
   not_found do
    erb :error

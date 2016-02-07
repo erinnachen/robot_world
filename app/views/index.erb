@@ -33,7 +33,10 @@
       <div class = "col-md-6 text-center">
         <h3>
         <button type="button" class="btn btn-primary">Edit</button>
-          <button type="button" class="btn btn-danger">Delete</button>
+        <form action = "/robots/<%= robot.id %>" method = "POST">
+          <input type="hidden" name="_method" value="delete">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
         </h3>
       </div>
     </div>
