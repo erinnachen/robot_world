@@ -4,7 +4,7 @@ class Robot
   attr_accessor :name, :city, :state, :avatar,
                 :birthdate, :date_hired, :department, :id
   def initialize(properties= nil)
-    self.robot_props.each do |key, value|
+    random_robot_props.each do |key, value|
       if properties
         value = properties[key] if properties[key]
       end
@@ -14,20 +14,33 @@ class Robot
   end
 
   def set_dates
-    self.birthdate = Date.parse(birthdate) if birthdate.class == String
-    self.date_hired = Faker::Time.between(birthdate, DateTime.now)
+    self.birthdate = Time.parse(birthdate) if birthdate.class == String
+    self.date_hired = Time.parse(birthdate) if birthdate.class == String
+    self.date_hired = Faker::Time.between(birthdate, Time.now) if date_hired < birthdate
   end
 
-  def robot_props
-    bd = Faker::Time.between(Date.parse("2000-01-01"), DateTime.now-10)
+  def random_robot_props
+    bd = Faker::Time.between(Time.parse("2000-01-01"), Time.now-10)
     props = {id: Random.rand(400000),
      name: Faker::Name.name,
      city: Faker::Address.city,
      state: Faker::Address.state_abbr,
      birthdate: bd,
+     date_hired: Faker::Time.between(bd, Time.now-10),
      department: departments[Random.rand(departments.length)]}
     props[:avatar] = Faker::Avatar.image(Digest::SHA1.hexdigest(props.to_s))
     props
+  end
+
+  def robot_props
+    {id: id,
+     name: name,
+     city: city,
+     state: state,
+     birthdate: birthdate,
+     department: department,
+     date_hired: date_hired,
+     avatar: avatar}
   end
 
   def departments

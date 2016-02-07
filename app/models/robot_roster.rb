@@ -5,14 +5,14 @@ class RobotRoster
   end
 
   def create(properties = nil)
-    if properties
-      robot_props = {}
-      properties.each do |key, value|
-        robot_props[key.to_sym] = value
-      end
-    else
-      robot_props = Robot.new.robot_props
-    end
+    # if properties
+    #   robot_props = {}
+    #   properties.each do |key, value|
+    #     robot_props[key.to_sym] = value
+    #   end
+    # else
+      robot_props = Robot.new(properties).robot_props
+    # end
     database.transaction do
       database['robots'] ||= []
       database['total'] ||= 0
