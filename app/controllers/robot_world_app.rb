@@ -4,6 +4,7 @@ require 'models/robot'
 
 class RobotWorldApp < Sinatra::Base
   set :root, File.expand_path("..", __dir__)
+  set :method_override, true
 
   get '/' do
     erb :dashboard
@@ -27,6 +28,13 @@ class RobotWorldApp < Sinatra::Base
     robot_roster.create()
     redirect '/robots'
   end
+
+  get '/robots/:id' do |id|
+    @robot = robot_roster.find(id.to_i)
+    erb :show
+  end
+
+
 
   not_found do
    erb :error

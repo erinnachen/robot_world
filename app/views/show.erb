@@ -1,0 +1,28 @@
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <a class="navbar-brand bigger-robot-font" href="/">(little) Robot World</a>
+    <ul class="nav navbar-nav navbar-right robot-font">
+      <li><a href="/robots">All the Robots</a></li>
+      <li><a href="/robots/new">New Robot(a)</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class = "col-md-6 col-md-offset-3 text-center background-orange imageborder">
+  <div class = "col-md-12 text-center">
+    <h1 class = "robot-font-bold" ><%=@robot.name %></h1>
+  </div>
+  <div class = "col-md-12 text-center background-white imageborder">
+    <img src="<%= @robot.avatar %>">
+    <br>
+    <br>
+  </div>
+  <p class = "robot-font-med">
+    ID: <%= @robot.id.to_s.rjust(6,'0') %><br>
+    Birthdate: <%= @robot.birthdate.strftime("%b %d, %Y")%><br>
+    <%= @robot.city %>, <%= @robot.state %><br>
+    <br>
+    Department: <%= @robot.department %><br>
+    Date Hired: <%= @robot.date_hired.strftime("%b %d, %Y")%>
+  </p>
+</div>

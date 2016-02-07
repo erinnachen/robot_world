@@ -1,18 +1,12 @@
 class RobotRoster
   attr_reader :database
+
   def initialize(database)
     @database = database
   end
 
   def create(properties = nil)
-    # if properties
-    #   robot_props = {}
-    #   properties.each do |key, value|
-    #     robot_props[key.to_sym] = value
-    #   end
-    # else
-      robot_props = Robot.new(properties).robot_props
-    # end
+    robot_props = Robot.new(properties).robot_props
     database.transaction do
       database['robots'] ||= []
       database['total'] ||= 0
@@ -20,13 +14,17 @@ class RobotRoster
       robot_props[:id] = database['total']
       database['robots'] << robot_props
     end
-
   end
 
   def raw_robots
     database.transaction do
       database['robots'] || []
     end
+  end
+
+  def find(id)
+    props = raw_robots.find {|data| data[:id] == id }
+    Robot.new(props)
   end
 
   def all

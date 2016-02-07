@@ -12,7 +12,7 @@
   <div class="col-md-6 well">
     <div class = "row">
       <div class = "col-md-6">
-        <img src="<%= robot.avatar %>" class="img-responsive">
+        <a href="/robots/<%= robot.id %>"><img src="<%= robot.avatar %>" class="img-responsive"></a>
       </div>
       <div class = "col-md-6">
         <p class = "robot-font-med">
@@ -31,8 +31,10 @@
         <h3 class = "robot-font-bold"><%= robot.name %> </h3>
       </div>
       <div class = "col-md-6 text-center">
-        <h3><button type="button" class="btn btn-primary">Edit</button>
-        <button type="button" class="btn btn-danger">Delete</button></h3>
+        <h3>
+        <button type="button" class="btn btn-primary">Edit</button>
+          <button type="button" class="btn btn-danger">Delete</button>
+        </h3>
       </div>
     </div>
   </div>
