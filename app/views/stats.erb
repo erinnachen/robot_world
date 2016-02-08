@@ -17,15 +17,15 @@
   <div class = "col-md-6"></div>
   <div class = "col-md-6 background-white text-center imageborder">
     <h1 class="robot-font divide-bottom ">Number of robots</h1>
-      <h3 class="robot-font"><%= @stats[:num] %></h3>
+      <h3 class="robot-font " id = "stats-rob-num"><%= @stats[:num] %></h3>
     <h1 class="robot-font divide-bottom">Hires by year</h1>
     <% @stats[:hires].each do |year, nhires| %>
       <% str= "Robots"%>
       <% str=str[0..-2] if nhires == 1%>
-      <h3 class="robot-font"><%= year%>: <%= nhires%> <%= str%></h3>
+      <h3 class="robot-font" id = "stats-hire-<%= year%>"><%= year%>: <%= nhires%> <%= str%></h3>
     <% end %>
     <h1 class="robot-font divide-bottom">Average robot age in seconds</h1>
-    <h3 class="robot-font"><%= @stats[:avg_age]%></h3>
+    <h3 class="robot-font" id = "stats-avg-age"><%= @stats[:avg_age]%></h3>
   </div>
   <div class = "col-md-12">
     <br>

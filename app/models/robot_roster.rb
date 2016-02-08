@@ -82,7 +82,11 @@ class RobotRoster
 
   def average_robot_age(robots, date)
     return 0 if robots.empty?
-    date ||= Time.now
+    if date
+      date = Time.parse(date) if date.class != Time
+    else
+      date = Time.now
+    end
     age_in_secs = robots.map {|robot| date-robot.birthdate}
     (age_in_secs.reduce(0,:+)/robots.length).round(2)
   end

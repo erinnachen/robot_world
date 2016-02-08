@@ -9,7 +9,7 @@ class RobotWorldApp < Sinatra::Base
   end
 
   get '/stats' do
-    @stats = robot_roster.stats
+    @stats = robot_roster.stats(params[:date])
     erb :stats
   end
 
