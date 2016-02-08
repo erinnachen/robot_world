@@ -1,5 +1,3 @@
-require 'yaml/store'
-
 class RobotWorldApp < Sinatra::Base
   set :root, File.expand_path("..", __dir__)
   set :method_override, true
@@ -58,9 +56,9 @@ class RobotWorldApp < Sinatra::Base
 
   def robot_roster
     if ENV["RACK_ENV"] == "test"
-      database = YAML::Store.new("db/robot_roster_test")
+      database = Sequel.sqlite("db/robot_world_test.sqlite3")
     else
-      database = YAML::Store.new("db/robot_roster_development")
+      database = Sequel.sqlite("db/robot_world.sqlite3")
     end
     @robot_roster ||= RobotRoster.new(database)
   end

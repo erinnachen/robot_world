@@ -31,10 +31,6 @@ class RobotRosterTest < Minitest::Test
     assert_equal [], robot_roster.all
   end
 
-  def test_all_returns_an_empty_array_if_there_are_no_robots
-    assert_equal [], robot_roster.all
-  end
-
   def test_all_returns_robots_in_order
     create_robots(20)
     robots = robot_roster.all

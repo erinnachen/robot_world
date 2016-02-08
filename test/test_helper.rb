@@ -6,14 +6,21 @@ require 'minitest/pride'
 require 'tilt/erb'
 require 'capybara/dsl'
 
+DatabaseCleaner[:sequel, {:connection => Sequel.sqlite("db/robot_world_test.sqlite3")}].strategy = :truncation
+
 module TestHelpers
+  def setup
+    DatabaseCleaner.start
+    super
+  end
+
   def teardown
-    robot_roster.delete_all
+    DatabaseCleaner.clean
     super
   end
 
   def robot_roster
-    database = YAML::Store.new('db/robot_roster_test')
+    database = Sequel.sqlite("db/robot_world_test.sqlite3")
     @robot_roster ||= RobotRoster.new(database)
   end
 

@@ -5,61 +5,45 @@ class RobotRoster
     @database = database
   end
 
-  def create(properties = nil)
-    robot_props = Robot.new(properties).robot_props
-    database.transaction do
-      database['robots'] ||= []
-      database['total'] ||= 0
-      database['total'] += 1
-      robot_props[:id] = database['total']
-      database['robots'] << robot_props
-    end
+  def dataset
+    database.from(:robots)
   end
 
-  def raw_robots
-    database.transaction do
-      database['robots'] || []
-    end
+  def create(properties = nil)
+    robot_props = Robot.new(properties).robot_props
+    robot_props.delete(:id)
+    dataset.insert(robot_props)
   end
 
   def find(id)
-    props = raw_robots.find {|data| data[:id] == id }
-    Robot.new(props) if props
+    props = dataset.where(:id =>id)
+    Robot.new(props.to_a[0]) unless props.to_a.empty?
   end
 
   def update(robot, id)
-    database.transaction do
-      target_robot = database["robots"].find { |robot| robot[:id] == id }
-      if target_robot
-        target_robot[:name] = robot[:name] unless robot[:name].empty?
-        unless robot[:birthdate].empty?
-          target_robot[:birthdate] = Time.parse(robot[:birthdate])
-          if Time.parse(robot[:birthdate]) > target_robot[:date_hired]
-            target_robot[:date_hired] = Faker::Time.between(Time.parse(robot[:birthdate]), Time.now)
-          end
-        end
-        target_robot[:city] = robot[:city] unless robot[:city].empty?
-        target_robot[:state] = robot[:state] unless robot[:state].empty?
-        target_robot[:department] = robot[:department]
+
+    target_robot = dataset.where(:id => id)
+    return if target_robot.to_a.empty?
+
+    target_robot.update(:name => robot[:name]) unless robot[:name].empty?
+    target_robot.update(:city => robot[:city]) unless robot[:city].empty?
+    target_robot.update(:state => robot[:state]) unless robot[:state].empty?
+    target_robot.update(:department => robot[:department])
+
+    unless robot[:birthdate].empty?
+      target_robot.update(:birthdate => robot[:birthdate])
+      if Time.parse(robot[:birthdate]) > Time.parse(dataset.select(:date_hired).where(:id => id).to_a[0][:date_hired])
+        target_robot.update(:date_hired => Faker::Time.between(Time.parse(robot[:birthdate]), Time.now).to_s)
       end
     end
   end
 
   def delete(id)
-    database.transaction do
-      database['robots'].delete_if { |robot| robot[:id] == id }
-    end
-  end
-
-  def delete_all
-    database.transaction do
-      database['robots'] = []
-      database['total'] = 0
-    end
+    dataset.where(:id => id).delete
   end
 
   def all
-    raw_robots.map {|data| Robot.new(data)}
+    dataset.to_a.map {|data| Robot.new(data)}
   end
 
   def stats(date = nil)
