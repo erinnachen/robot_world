@@ -3,12 +3,6 @@ require_relative '../test_helper'
 class RobotRosterTest < Minitest::Test
   include TestHelpers
 
-  # def create_robots(n=1)
-  #   n.times do |num|
-  #     robot_roster.create({name: "Jane Robota #{num+1}", birthdate: Time.parse('02/07/2000')})
-  #   end
-  # end
-
   def test_it_can_create_a_robot
     create_robots(1)
     robots = robot_roster.all
