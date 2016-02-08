@@ -24,7 +24,7 @@ class UserCanCreateNewRobots < FeatureTest
     select "Data Collection", from: "robot_dept"
 
     click_button "beep beep beep"
-    save_and_open_page
+
     assert_equal '/robots', current_path
 
     robot = robot_roster.all.first
