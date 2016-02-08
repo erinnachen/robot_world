@@ -3,11 +3,11 @@ require_relative '../test_helper'
 class RobotRosterTest < Minitest::Test
   include TestHelpers
 
-  def create_robots(n=1)
-    n.times do |num|
-      robot_roster.create({name: "John Smith #{num+1}", birthdate: Time.parse('02/07/2000')})
-    end
-  end
+  # def create_robots(n=1)
+  #   n.times do |num|
+  #     robot_roster.create({name: "Jane Robota #{num+1}", birthdate: Time.parse('02/07/2000')})
+  #   end
+  # end
 
   def test_it_can_create_a_robot
     create_robots(1)
@@ -16,7 +16,7 @@ class RobotRosterTest < Minitest::Test
 
     assert_equal 1, robots.length
     assert robot.id
-    assert_equal "John Smith 1", robot.name
+    assert_equal "Jane Robota 1", robot.name
     assert robot.birthdate < Time.now
   end
 
@@ -48,7 +48,7 @@ class RobotRosterTest < Minitest::Test
     id0 = robots.first.id
     robots.each_with_index do |robot, ind|
       assert_equal id0+ind, robot.id
-      assert_equal "John Smith #{ind+1}", robot.name
+      assert_equal "Jane Robota #{ind+1}", robot.name
       properties.each do |prop|
         assert robot.robot_props[prop]
       end
@@ -66,7 +66,7 @@ class RobotRosterTest < Minitest::Test
     5.times do |ind|
       robot = robot_roster.find(id0+ind)
       assert_equal id0+ind, robot.id
-      assert_equal "John Smith #{ind+1}", robot.name
+      assert_equal "Jane Robota #{ind+1}", robot.name
       properties.each do |prop|
         assert robot.robot_props[prop]
       end
@@ -104,7 +104,7 @@ class RobotRosterTest < Minitest::Test
 
     robots.each_with_index do |robot, ind|
       assert_equal id0+ind, robot.id
-      assert_equal "John Smith #{ind+1}", robot.name
+      assert_equal "Jane Robota #{ind+1}", robot.name
       properties.each do |prop|
         assert robot.robot_props[prop]
       end
@@ -144,7 +144,7 @@ class RobotRosterTest < Minitest::Test
     robots = robot_roster.all
     robots.each_with_index do |robot, ind|
       assert_equal id0+ind, robot.id
-      assert_equal "John Smith #{ind+1}", robot.name
+      assert_equal "Jane Robota #{ind+1}", robot.name
       properties.each do |prop|
         assert robot.robot_props[prop]
       end
@@ -172,7 +172,7 @@ class RobotRosterTest < Minitest::Test
       robot_roster.create({name: "Jane Smith #{num+1}", birthdate: Time.parse('25/01/2000'), date_hired: Time.parse('02/07/2010')})
     end
     2.times do |num|
-      robot_roster.create({name: "John Smith #{num+1}", birthdate: Time.parse('25/01/1997'), date_hired: Time.parse('02/07/2003')})
+      robot_roster.create({name: "Jane Robota #{num+1}", birthdate: Time.parse('25/01/1997'), date_hired: Time.parse('02/07/2003')})
     end
     assert_equal [[2010, 3], [2003, 2]], robot_roster.stats[:hires]
   end
@@ -184,7 +184,7 @@ class RobotRosterTest < Minitest::Test
   def test_stats_average_returns_correct_time_of_hire_of_robots
     ref_date = Time.parse('02/07/2010')
     robot_roster.create({name: "Jane Smith", birthdate: ref_date - 45})
-    robot_roster.create({name: "John Smith", birthdate: ref_date - 33})
+    robot_roster.create({name: "Jane Robota", birthdate: ref_date - 33})
     robot_roster.create({name: "Reginald Robot", birthdate: ref_date - 22})
     assert_equal 33.33, robot_roster.stats(ref_date)[:avg_age]
   end

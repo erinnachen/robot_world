@@ -8,12 +8,11 @@
     </ul>
   </div>
 </nav>
-
 <% @robots.each do |robot| %>
-  <div class="col-md-6 well">
+  <div class="col-md-6 well robot-<%=robot.id%>">
     <div class = "row">
       <div class = "col-md-6">
-        <a href="/robots/<%= robot.id %>"><img src="<%= robot.avatar %>" class="img-responsive"></a>
+        <a href="/robots/<%= robot.id %>" id = "robot-image-<%= robot.id %>"><img src="<%= robot.avatar %>" class="img-responsive"></a>
       </div>
       <div class = "col-md-6">
         <p class = "robot-font-med">
