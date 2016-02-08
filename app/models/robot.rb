@@ -6,7 +6,9 @@ class Robot
   def initialize(properties= nil)
     random_robot_props.each do |key, value|
       if properties
-        value = properties[key] if properties[key]
+        unless properties[key].class == String && properties[key].empty?
+          value = properties[key] if properties[key]
+        end
       end
       self.send("#{key}=",value)
     end
@@ -20,7 +22,7 @@ class Robot
       self.birthdate = random_robot_props[:birthdate]
     end
     self.birthdate = random_robot_props[:birthdate] if birthdate > Time.now
-    self.date_hired = Time.parse(birthdate) if birthdate.class == String
+    self.date_hired = Time.parse(date_hired) if date_hired.class == String
     self.date_hired = Faker::Time.between(birthdate, Time.now) if date_hired < birthdate
   end
 

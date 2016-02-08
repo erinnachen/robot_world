@@ -24,22 +24,24 @@ class RobotRoster
 
   def find(id)
     props = raw_robots.find {|data| data[:id] == id }
-    Robot.new(props)
+    Robot.new(props) if props
   end
 
   def update(robot, id)
     database.transaction do
       target_robot = database["robots"].find { |robot| robot[:id] == id }
-      target_robot[:name] = robot[:name] unless robot[:name].empty?
-      unless robot[:birthdate].empty?
-        target_robot[:birthdate] = Time.parse(robot[:birthdate])
-        if Time.parse(robot[:birthdate]) > target_robot[:date_hired]
-          target_robot[:date_hired] = Faker::Time.between(Time.parse(robot[:birthdate]), Time.now)
+      if target_robot
+        target_robot[:name] = robot[:name] unless robot[:name].empty?
+        unless robot[:birthdate].empty?
+          target_robot[:birthdate] = Time.parse(robot[:birthdate])
+          if Time.parse(robot[:birthdate]) > target_robot[:date_hired]
+            target_robot[:date_hired] = Faker::Time.between(Time.parse(robot[:birthdate]), Time.now)
+          end
         end
+        target_robot[:city] = robot[:city] unless robot[:city].empty?
+        target_robot[:state] = robot[:state] unless robot[:state].empty?
+        target_robot[:department] = robot[:department]
       end
-      target_robot[:city] = robot[:city] unless robot[:city].empty?
-      target_robot[:state] = robot[:state] unless robot[:state].empty?
-      target_robot[:department] = robot[:department]
     end
   end
 
@@ -49,16 +51,25 @@ class RobotRoster
     end
   end
 
+  def delete_all
+    database.transaction do
+      database['robots'] = []
+      database['total'] = 0
+    end
+  end
+
   def all
     raw_robots.map {|data| Robot.new(data)}
   end
 
-  def stats
+  def stats(date = nil)
     robots = all
-    {avg_age: average_robot_age(robots),
+    {avg_age: average_robot_age(robots, date),
      hires: calculate_hires_by_year(robots),
      num: robots.length}
   end
+
+  private
 
   def calculate_hires_by_year(robots)
     robot_years = robots.group_by { |robot| robot.date_hired.year }
@@ -69,9 +80,10 @@ class RobotRoster
     num_hires.sort_by {|year, hires| year }.reverse
   end
 
-  def average_robot_age(robots, date = nil)
+  def average_robot_age(robots, date)
+    return 0 if robots.empty?
     date ||= Time.now
     age_in_secs = robots.map {|robot| date-robot.birthdate}
-    age_in_secs.reduce(0,:+)/robots.length
+    (age_in_secs.reduce(0,:+)/robots.length).round(2)
   end
 end

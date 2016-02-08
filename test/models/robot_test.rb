@@ -20,6 +20,18 @@ class RobotTest< Minitest::Test
     assert_kind_of Time, robot.date_hired
   end
 
+  def test_robot_still_has_properties_even_when_fields_are_empty
+    robot = helper_robot({name: "", city: "", state: "", birthdate: "", department: "Recreation"})
+    properties.each do |prop|
+      assert robot.robot_props[prop]
+    end
+    assert_kind_of Time, robot.birthdate
+    assert_kind_of Time, robot.date_hired
+    refute_empty robot.robot_props[:name]
+    refute_empty robot.robot_props[:city]
+    refute_empty robot.robot_props[:state]
+  end
+
   def test_birthdate_is_before_date_hired
     robot = helper_robot
     assert robot.birthdate < robot.date_hired
